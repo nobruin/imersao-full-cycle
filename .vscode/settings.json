@@ -1,0 +1,8 @@
+{
+    "eslint.workingDirectories": [
+        {"directory": "./netjs-api/"},
+    ],
+    "eslint.options": {
+        "project":"./netjs-api/tsconfig.json"
+    }
+}

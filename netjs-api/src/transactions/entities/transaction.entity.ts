@@ -4,7 +4,10 @@ import {
   Table,
   DataType,
   PrimaryKey,
+  ForeignKey,
 } from 'sequelize-typescript';
+import { Account } from 'src/accounts/entities/account.entity';
+import { ToNumber } from '../../common/db/to-number.decorator';
 
 export enum TransactionCategory {
   CATEGORY1 = 'category1',
@@ -42,9 +45,18 @@ export class Transaction extends Model {
   @Column({ allowNull: false })
   category: TransactionCategory;
 
+  @ToNumber
   @Column({ allowNull: false, type: DataType.DECIMAL(10, 2) })
   amount: number;
 
   @Column({ allowNull: false })
   type: TransactionType;
+
+  @ForeignKey(() => Account)
+  @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    allowNull: false,
+  })
+  account_id: string;
 }
